@@ -14,15 +14,45 @@
 				<button v-if="!isRegister" :disabled="!isDirty" class="disabled:opacity-40 disabled:text-yellow-400 cursor-pointer focus:outline-none bg-white text-lg text-black font-black mt-7 px-5 py-3">sign in</button>
 				<button v-if="isRegister" :disabled="!isDirty" class="disabled:opacity-40 disabled:text-yellow-400 cursor-pointer focus:outline-none bg-white text-lg text-black font-black mt-7 px-5 py-3">register</button>
 			</form>
-			<span v-if="!isRegister" @click="switchToRegister" class="underline cursor-pointer text-black tracking-wide">Register</span>
-			<span v-if="isRegister" @click="switchToRegister" class="underline cursor-pointer text-black tracking-wide">Sign in</span>
+			<span @click="toggleLoginRegister" class="underline cursor-pointer text-black tracking-wide">{{ isRegister ? 'sign in' : 'register'}}</span>
 		</section>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'Login'
+	name: 'Login',
+	data(){
+		return{
+			userName: '',
+			password: '',
+			isRegister: false,
+			isDirty: false
+		}
+	},
+	methods:{
+		submitForm(){
+			const user = {
+				username: this.userName,
+				password: this.password
+			}
+			this.isRegister ? this.registerUser(user) : this.loginUser(user);
+		},
+		registerUser(userObj){
+			console.log('Register user', userObj);
+		},
+		loginUser(userObj){
+			console.log('Login user', userObj);
+		},
+		userValidation(){
+			this.userName ? this.userName.trim().length>0 ? this.isDirty=true : this.isDirty=false : this.isDirty=false;
+		},
+		toggleLoginRegister(){
+			this.isRegister = !this.isRegister;
+			this.userName = '';
+			this.password = '';
+		}
+	}
 }
 </script>
 
