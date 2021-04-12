@@ -1,5 +1,4 @@
 <template>
-
 	<article class="py-5 px-10 text-left border-black border-b" v-for="post in $store.getters.getAllPosts" :key="post.id+post.userId">
 		<router-link :to="`/post/${post.userId}/${post.id}`">
 			<h2 class="post-title text-5xl font-black mb-3 hover:underline">{{ post.title }}</h2>
@@ -16,18 +15,13 @@
 
 <script>
 export default {
-	name: 'Post',
-	// props: ['post'],
-	methods:{
-		
-	}
+	name: 'Post'
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.post-title::first-letter,
-.post-body::first-letter{
-	text-transform: capitalize;
-}
+	.post-title::first-letter,
+	.post-body::first-letter{
+		text-transform: capitalize;
+	}
 </style>

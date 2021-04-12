@@ -15,15 +15,15 @@ export default {
 	name: 'Posts',
 	components: { Header, Post },
 	methods: {
-		openProfile(userId){
-			console.log(userId);
+		fetchPassResponse(response){
+			if(response.ok){
+				return response.json();
+			}
 		},
 		getPosts(){
-			fetch('https://jsonplaceholder.typicode.com/posts/').then(response => {
-				if(response.ok){
-					return response.json();
-				}
-			}).then(responseData => {
+			fetch('https://jsonplaceholder.typicode.com/posts/')
+			.then(this.fetchPassResponse)
+			.then(responseData => {
 				responseData.forEach(item => {
 					this.getUser(item.userId).then(data=>{
 						item.userData=data;
@@ -36,11 +36,9 @@ export default {
 			});
 		},
 		getUser(userId){
-			return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`).then(response => {
-				if(response.ok){
-					return response.json();
-				}
-			}).then(responseData => {
+			return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+			.then(this.fetchPassResponse)
+			.then(responseData => {
 				this.$store.commit('addAuthorToArray', responseData);
 				return responseData;
 			}).catch(er => {
