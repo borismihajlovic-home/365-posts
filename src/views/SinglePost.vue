@@ -1,5 +1,7 @@
 <template>
-  <div class="single-post"></div>
+  <div class="single-post">
+    <h1>Single post page</h1>
+  </div>
 </template>
 
 <script>
