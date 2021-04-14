@@ -3,7 +3,7 @@
 		<Profile></Profile>
 		<div class="max-w-750px bg-transparent mx-auto border-black border-l border-r">
 			<Header></Header>
-			<Post></Post>
+			<Post></Post>	
 		</div>
 	</div>
 </template>

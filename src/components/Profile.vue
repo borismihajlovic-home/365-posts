@@ -3,7 +3,7 @@
 		<div class="w-full max-w-750px bg-yellow-200 border-black border max-h-screen overflow-auto">
 			<div class="flex bg-yellow-450 border-black border-b justify-end p-2">
 				<img class="h-7 mr-3" src="../assets/logo_black.png" alt="logo" />
-				<div class="w-7 h-7 text-white-1 font-black text-4xl leading-4 cursor-pointer" @click="$store.commit('resetAuthorId')">x</div>
+				<div class="w-7 h-7 text-white-1 font-black text-4xl leading-4 cursor-pointer" @click="$store.dispatch('closeAuthorProfile')">x</div>
 			</div>
 			<div class=" bg-yellow-450 border-b border-black py-5 pl-16 flex justify-start">
 				<img class="rounded-full h-10 mr-3" src="https://via.placeholder.com/150" alt="userImg" />
@@ -42,11 +42,6 @@
 <script>
 export default {
 	name: 'Post',
-	data(){
-		return{
-			// author: this.$store.getters.getAuthorProfile
-		}
-	},
 	computed:{
 		author(){
 			return this.$store.getters.getAuthorProfile;

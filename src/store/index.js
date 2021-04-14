@@ -16,12 +16,48 @@ export default createStore({
 		setAuthor(state, obj){
 			state.posts.forEach(element => {
 				if(element.id == obj.postId && element.userId == obj.authorId){
+				console.log('element')
 					state.authorProfile = element;
 				}
 			});
 		},
-		resetAuthorId(state){
+		resetAuthorObject(state){
 			state.authorProfile = {};
+		}
+	},
+	actions: {
+		getPosts(context){
+			fetch('https://jsonplaceholder.typicode.com/posts/')
+			.then((response)=>{
+				if(response.ok){ return response.json(); }
+			})
+			.then(responseData => {
+				responseData.forEach(item => {
+					context.dispatch('getUser', {userId: item.userId, post: item});
+				});
+			}).catch(er => {
+				console.log(er);
+			});
+		},
+		getUser(context, payload){
+			fetch(`https://jsonplaceholder.typicode.com/users/${payload.userId}`)
+			.then((response)=>{
+				if(response.ok){ return response.json(); }
+			})
+			.then(responseData => {
+				let item = payload.post
+				item.userData = responseData;
+				context.commit('addAuthorToArray', responseData);
+				context.commit('addPostToArray', item);
+			}).catch(er => {
+				console.log(er);
+			});
+		},
+		openAuthorProfile(context, object){
+			context.commit('setAuthor', object);
+		},
+		closeAuthorProfile(context){
+			context.commit('resetAuthorObject')
 		}
 	},
 	getters:{
@@ -34,8 +70,6 @@ export default createStore({
 		getAuthorProfile(state){
 			return state.authorProfile;
 		}
-	},
-	actions: {
 	},
 	modules: {
 	}
