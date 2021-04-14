@@ -4,7 +4,7 @@
 			<h2 class="post-title text-5xl font-black mb-3 hover:underline">{{ post.title }}</h2>
 		</router-link>		
 		<section class="post-body mb-10">{{ post.body }}</section>
-		<PostUserHolder :post="post"></PostUserHolder>
+		<PostUserHolder :isPostList="true" :post="post"></PostUserHolder>
 	</article>
 </template>
 
