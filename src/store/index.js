@@ -4,7 +4,7 @@ export default createStore({
 	state: {
 		posts: [],
 		authors:[],
-		authorId: null
+		authorProfile:{}
 	},
 	mutations: {
 		addPostToArray(state, postObject){
@@ -13,20 +13,26 @@ export default createStore({
 		addAuthorToArray(state, authorObject){
 			state.authors.push(authorObject);
 		},
-		setAuthorId(state, authorId){
-			state.authorId = authorId;
-			console.log(state.authorId);
+		setAuthor(state, obj){
+			state.posts.forEach(element => {
+				if(element.id == obj.postId && element.userId == obj.authorId){
+					state.authorProfile = element;
+				}
+			});
 		},
 		resetAuthorId(state){
-			state.authorId = null;
+			state.authorProfile = {};
 		}
 	},
 	getters:{
 		getAllPosts(state){
 			return state.posts;
 		},
-		getAuthorId(state){
-			return state.authorId;
+		isAuthorProfileSet(state){
+			return !(Object.keys(state.authorProfile).length === 0 && state.authorProfile.constructor === Object);
+		},
+		getAuthorProfile(state){
+			return state.authorProfile;
 		}
 	},
 	actions: {

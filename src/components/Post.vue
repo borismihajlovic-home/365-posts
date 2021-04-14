@@ -5,7 +5,7 @@
 		</router-link>		
 		<section class="post-body mb-10">{{ post.body }}</section>
 		<footer class="flex justify-end leading-8">
-			<div class="flex cursor-pointer hover:underline" @click="$store.commit('setAuthorId', post.userId)">
+			<div class="flex cursor-pointer hover:underline" @click="$store.commit('setAuthor', {postId:post.id, authorId: post.userId})">
 				<span class="mr-3 font-black">{{ post.userData.username }}</span> 
 				<img class="rounded-full h-8" src="https://via.placeholder.com/150" alt="userImg" />
 			</div>
