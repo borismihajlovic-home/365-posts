@@ -38,6 +38,11 @@ const authentificationModule = {
 			context.state.loggedinUser.username='';
 			context.state.loggedinUser.password='';
 		}
+	},
+	getters:{
+		isUserAuthenticated(state){
+			return state.loggedinUser.username !== '';
+		}
 	}
 }
 
