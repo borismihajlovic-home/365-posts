@@ -20,28 +20,10 @@
 				<div v-for="comment in comments" :key="comment.id" class="flex justify-between p-5 pb-10 border-t border-gray-400">
 					<div class="image w-1/12"><img class="rounded-full h-8 w-8" src="https://via.placeholder.com/150" alt="userImg" /></div>
 					<div class="px-2">
-						<div class="text-blue-300 text-xs mb-2 font-black">{{ comment.commentUser }}</div>
+						<div class="text-blue-400 text-xs mb-2 font-black">{{ comment.username ? comment.username : comment.email }}</div>
 						<div>{{ comment.body }}</div>
 					</div>
 				</div>
-				
-				<!-- Dummy comments -->
-				<!-- <div class="flex justify-between p-5 pb-10 border-t border-gray-400">
-					<div class="image w-1/6"><img class="rounded-full h-8 w-8" src="https://via.placeholder.com/150" alt="userImg" /></div>
-					<div class="px-2">
-						<div class="text-blue-300 text-xs mb-2 font-black">Bret</div>
-						<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, atque ab velit, hic dolore reprehenderit cumque corporis voluptate maiores repudiandae optio eligendi iste aspernatur! Eveniet modi obcaecati magnam itaque aut.</div>
-					</div>
-				</div>
-				<div class="flex justify-between p-5 pb-10 border-t border-gray-400">
-					<div class="image w-1/6"><img class="rounded-full h-8 w-8" src="https://via.placeholder.com/150" alt="userImg" /></div>
-					<div class="px-2">
-						<div class="text-blue-300 text-xs mb-2 font-black">Bret</div>
-						<div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, atque ab velit, hic dolore reprehenderit cumque corporis voluptate maiores repudiandae optio eligendi iste aspernatur! Eveniet modi obcaecati magnam itaque aut.</div>
-					</div>
-				</div> -->
-				<!-- END Dummy comments -->
-				
 			</section>
 		</div>
 	</div>
@@ -66,19 +48,29 @@ export default {
 			const clickedPost = postsArray.filter(item => item.id == this.$route.params.postId && item.userId == this.$route.params.userId);
 			this.post = clickedPost[0];
 		},
-		getComments(){
+		fetchComments(){
+			// console.log(this.post)
 			// TODO: Check the data that is returned on https://jsonplaceholder.typicode.com/posts/1/comments and implement comments
-			this.comments = [
-				{commentUser: 'Boeis', body: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, atque ab velit, hic dolore reprehenderit cumque corporis'},
-				{commentUser: 'Boeis', body: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, atque ab velit, hic dolore reprehenderit cumque corporis'},
-				{commentUser: 'Boeis', body: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, atque ab velit, hic dolore reprehenderit cumque corporis'},
-				{commentUser: 'Boeis', body: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, atque ab velit, hic dolore reprehenderit cumque corporis'}
-			]
+			fetch(`https://jsonplaceholder.typicode.com/posts/${this.post.userId}/comments`).then(response=>{
+				if(response.ok){
+					return response.json();
+				}
+			}).then(responseData => {
+				responseData.forEach(element => {
+					const allAuthors = this.$store.getters.getAllAuthors;
+					
+					element.username = allAuthors.filter(item => item.email === element.email)[0];
+					console.log(element);
+					this.comments.push(element);
+				});
+			}).catch(er=>{
+				console.log('ERROR getting comments: ',er);
+			});
 		}
 	},
 	created(){
 		this.setPost(this.$store.getters.getAllPosts);
-		this.getComments();
+		this.fetchComments();
 	}
 }
 </script>

@@ -11,10 +11,10 @@
 					<label for="password" class="relative"><span class="absolute -bottom-2 text-black text-base">Password</span></label>
 					<input @input="passwordValidation" :value="password" class="w-3/4 bg-yellow-450 border-b-2 border-t-0 border-l-0 border-r-0 border-black text-lg text-black px-2 outline-none font-black" type="password" name="passsword" id="password" />
 				</div>
-				<button v-if="!isRegister" :disabled="!isDirty" class="disabled:opacity-40 disabled:text-yellow-400 cursor-pointer focus:outline-none bg-white text-lg text-black font-black mt-7 px-5 py-3">sign in</button>
-				<button v-if="isRegister" :disabled="!isDirty" class="disabled:opacity-40 disabled:text-yellow-400 cursor-pointer focus:outline-none bg-white text-lg text-black font-black mt-7 px-5 py-3">register</button>
+				<button :disabled="!isDirty" class="cursor-pointer focus:outline-none bg-white-1 text-lg text-black font-black mt-7 px-5 py-3 disabled:opacity-40 disabled:text-yellow-400">{{ buttonText }}</button>
+				<!-- <button v-if="isRegister" :disabled="!isDirty" class="disabled:opacity-40 disabled:text-yellow-400 cursor-pointer focus:outline-none bg-white text-lg text-black font-black mt-7 px-5 py-3">register</button> -->
 			</form>
-			<span @click="toggleLoginRegister" class="underline cursor-pointer text-black tracking-wide">{{ isRegister ? 'sign in' : 'register'}}</span>
+			<span @click="toggleLoginRegister" class="underline cursor-pointer text-black tracking-wide">{{ changeFormText}}</span>
 		</section>
 	</div>
 </template>
@@ -28,6 +28,20 @@ export default {
 			password: '',
 			isRegister: false,
 			isDirty: false
+		}
+	},
+	computed:{
+		buttonText(){
+			if(this.isRegister){
+				return 'subscribe'
+			}
+			return 'login';
+		},
+		changeFormText(){
+			if(this.isRegister){
+				return 'login'
+			}
+			return 'subscribe';
 		}
 	},
 	methods:{
