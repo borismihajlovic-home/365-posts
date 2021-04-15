@@ -2,7 +2,7 @@
 	<div class="posts min-h-screen bg-yellow-450 pb-8">
 		
 		<Profile></Profile>
-		<div class="max-w-750px bg-transparent mx-auto border-black border-l border-r">	
+		<div class="max-w-750px bg-transparent mx-auto border-black border-l border-r pt-16 sm:pt-24">	
 			<Header></Header>
 			<PostUserHolder :isPostList="false" :post="post"></PostUserHolder>
 
@@ -18,7 +18,7 @@
 				
 				<!-- comment -->
 				<div v-for="comment in comments" :key="comment.id" class="flex justify-between p-5 pb-10 border-t border-gray-400">
-					<div class="image w-1/12"><img class="rounded-full h-8 w-8" src="https://via.placeholder.com/150" alt="userImg" /></div>
+					<div class="image w-20 sm:w-1/12"><img class="rounded-full h-8 w-8" src="https://via.placeholder.com/150" alt="userImg" /></div>
 					<div class="px-2">
 						<div class="text-blue-400 text-xs mb-2 font-black">{{ comment.username ? comment.username : comment.email }}</div>
 						<div>{{ comment.body }}</div>
