@@ -20,21 +20,22 @@ const authentificationModule = {
 	actions:{
 		register(context,payload){
 			if(context.state.loggedinUser.username == payload.username ){
-				throw {ok: false, text: 'There already is a user with this username: '+ payload.username};
+				return {ok: false, message: 'There already is a user with this username: '+ payload.username};
 			}else{
 				context.commit('register', payload);
-				return {ok: true, text: 'User registered'}
+				return {ok: true, message: 'User registered'}
 			}
 		},
 		login(context,payload){
+			console.log('ododo')
 			if(context.state.constUser.username == payload.username && context.state.constUser.password == payload.password ){
-				context.commit('register', payload);
-				return {ok: true, text: 'User logedin'};
+				context.commit('login', payload);
+				return {ok: true, message: 'User logedin'};
 			}else{
-				throw {ok: false, text: 'Username or password not correct'};
+				return {ok: false, message: 'Username or password not correct'};
 			}
 		},
-		logOut(context){
+		logout(context){
 			context.state.loggedinUser.username='';
 			context.state.loggedinUser.password='';
 		}

@@ -49,18 +49,9 @@ export default {
 	},
 	methods:{
 		submitForm(){
+			this.error='';
 			this.isRegister ? this.authenticate(this.user, 'register') : this.authenticate(this.user, 'login');
 		},
-		// registerUser(userObj){
-		// 	const registerResponse = this.$store.dispatch('register', userObj);
-		// 	registerResponse.then(result=>{
-		// 		if(result.ok){
-		// 			this.$router.push('/posts');
-		// 		}else{
-		// 			this.error = result.message;
-		// 		}
-		// 	});
-		// },
 		authenticate(userObj, authType){
 			const response = this.$store.dispatch(authType, userObj);
 			response.then(result=>{
@@ -69,19 +60,8 @@ export default {
 				}else{
 					this.error = result.message;
 				}
-			});
+			}).catch(er=>{console.log(er)});
 		},
-		// loginUser(userObj){
-		// 	console.log('Login user', userObj);
-		// 	const loginResponse = this.$store.dispatch('register', userObj);
-		// 	registerResponse.then(result=>{
-		// 		if(result.ok){
-		// 			this.$router.push('/posts');
-		// 		}else{
-		// 			this.error = result.message;
-		// 		}
-		// 	});
-		// },
 		userValidation(e){
 			const username = e.target.value;
 			(username.trim().length>0) ? this.isDirty=true : !this.isDirty ? this.isDirty=false : null;
