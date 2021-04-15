@@ -1,5 +1,47 @@
 import { createStore } from 'vuex'
 
+const authentificationModule = {
+	state(){
+		return{
+			constUser: {username:'testinguser', password:'test1'},
+			loggedinUser: {username: '', password: ''}
+		}
+	},
+	mutations:{
+		register(state, payload){
+			state.loggedinUser = {...payload};
+			console.log(state.loggedinUser);
+		},
+		login(state, payload){
+			state.loggedinUser = {...payload};
+			console.log(state.loggedinUser);
+		}
+	},
+	actions:{
+		register(context,payload){
+			if(context.state.loggedinUser.username == payload.username ){
+				throw {ok: false, text: 'There already is a user with this username: '+ payload.username};
+			}else{
+				context.commit('register', payload);
+				return {ok: true, text: 'User registered'}
+			}
+		},
+		login(context,payload){
+			if(context.state.constUser.username == payload.username && context.state.constUser.password == payload.password ){
+				context.commit('register', payload);
+				return {ok: true, text: 'User logedin'};
+			}else{
+				throw {ok: false, text: 'Username or password not correct'};
+			}
+		},
+		logOut(context){
+			context.state.loggedinUser.username='';
+			context.state.loggedinUser.password='';
+		}
+	}
+}
+
+
 export default createStore({
 	state: {
 		posts: [],
@@ -75,5 +117,6 @@ export default createStore({
 		}
 	},
 	modules: {
+		auth: authentificationModule
 	}
 })
