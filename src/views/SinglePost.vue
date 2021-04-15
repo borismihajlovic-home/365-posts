@@ -16,7 +16,7 @@
 			<section  class="bg-yellow-200 text-left border-b border-black">
 				<div class="px-7 py-5 font-black text-blue-400 text-3xl border-t border-gray-400">Comments</div>
 				
-				<!-- comment odkomentarisati kada se "dovuku" komentari -->
+				<!-- comment -->
 				<div v-for="comment in comments" :key="comment.id" class="flex justify-between p-5 pb-10 border-t border-gray-400">
 					<div class="image w-1/12"><img class="rounded-full h-8 w-8" src="https://via.placeholder.com/150" alt="userImg" /></div>
 					<div class="px-2">
@@ -49,8 +49,6 @@ export default {
 			this.post = clickedPost[0];
 		},
 		fetchComments(){
-			// console.log(this.post)
-			// TODO: Check the data that is returned on https://jsonplaceholder.typicode.com/posts/1/comments and implement comments
 			fetch(`https://jsonplaceholder.typicode.com/posts/${this.post.userId}/comments`).then(response=>{
 				if(response.ok){
 					return response.json();
@@ -75,6 +73,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

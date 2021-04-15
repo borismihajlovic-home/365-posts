@@ -27,7 +27,6 @@ const authentificationModule = {
 			}
 		},
 		login(context,payload){
-			console.log('ododo')
 			if(context.state.constUser.username == payload.username && context.state.constUser.password == payload.password ){
 				context.commit('login', payload);
 				return {ok: true, message: 'User logedin'};
