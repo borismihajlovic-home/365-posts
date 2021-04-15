@@ -1,5 +1,5 @@
 <template>
-	<section v-if="$store.getters.isAuthorProfileSet" class="fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-white-09 overflow-auto">
+	<section v-if="$store.getters.isAuthorProfileSet" class="fixed top-0 bottom-0 left-0 right-0 flex justify-center z-10 items-center bg-white-09 overflow-auto">
 		<div class="w-full max-w-750px bg-yellow-200 border-black border max-h-screen overflow-auto">
 			<div class="flex bg-yellow-450 border-black border-b justify-end p-2">
 				<img class="h-7 mr-3" src="../assets/logo_black.png" alt="logo" />
