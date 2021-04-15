@@ -1,7 +1,9 @@
 # 365-posts
 ## About the project
 This is a simple App that shows list of posts, single post and user info.
-It also has a mock register, login/logout functionality. For login testing there is a hardcodded user - username: testinguser, password: test1. 
+It also has a mock register, login/logout functionality. For login testing there is a hardcodded user:
+__username: testinguser__
+__password: test1.__ 
 
 
 ## Requirements

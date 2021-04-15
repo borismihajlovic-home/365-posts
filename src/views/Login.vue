@@ -1,5 +1,5 @@
 <template>
-	<div class="login h-screen bg-yellow-450 flex justify-center items-center">
+	<div class="login h-screen bg-yellow-450 flex justify-center items-center p-5">
 		<section class="max-w-350px">
 			<img src="../assets/logo.png" alt="logo" />
 			
@@ -7,12 +7,12 @@
 				<div class="text-l font-bold text-red-500">{{ error }}</div>
 
 				<div class="flex justify-between mb-3">
-					<label for="username" class="relative"><span class="absolute -bottom-2 text-black text-base">Username</span></label>
+					<label for="username" class="relative"><span class="w-1/4 absolute -bottom-2 text-black text-base">Username</span></label>
 					<input @input="isDirtyInput" v-model="user.username" required class="w-3/4 bg-yellow-450 border-b-2 border-t-0 border-l-0 border-r-0 border-black text-lg text-black px-2 outline-none font-black" type="text" name="username" id="username" />
 				</div>
 				
 				<div class="flex justify-between mb-3">
-					<label for="password" class="relative"><span class="absolute -bottom-2 text-black text-base">Password</span></label>
+					<label for="password" class="relative "><span class="w-1/4 absolute -bottom-2 text-black text-base">Password</span></label>
 					<input @input="isDirtyInput" v-model="user.password" required class="w-3/4 bg-yellow-450 border-b-2 border-t-0 border-l-0 border-r-0 border-black text-lg text-black px-2 outline-none font-black" type="password" name="passsword" id="password" />
 				</div>
 				
