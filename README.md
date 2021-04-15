@@ -1,7 +1,8 @@
 # 365-posts
 ## About the project
 This is a simple App that shows list of posts, single post and user info.
-It also has a login/logout functionality.
+It also has a mock register, login/logout functionality. For login testing there is a hardcodded user - username: testinguser, password: test1. 
+
 
 ## Requirements
 To setup this project you need to have Node.js installed on your local machine.
