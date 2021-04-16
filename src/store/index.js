@@ -87,6 +87,7 @@ export default createStore({
 			});
 		},
 		getUser(context, payload){
+			const allAusthors = context.state.authors;
 			fetch(`https://jsonplaceholder.typicode.com/users/${payload.userId}`)
 			.then((response)=>{
 				if(response.ok){ return response.json(); }
@@ -94,7 +95,10 @@ export default createStore({
 			.then(responseData => {
 				let item = payload.post
 				item.userData = responseData;
-				context.commit('addAuthorToArray', responseData);
+				if(!allAusthors.find(author => author.id == item.userId)){
+					context.commit('addAuthorToArray', responseData);
+					console.log('user added');
+				}
 				context.commit('addPostToArray', item);
 			}).catch(er => {
 				console.log(er);

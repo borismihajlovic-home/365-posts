@@ -69,6 +69,7 @@ export default {
 	created(){
 		this.setPost(this.$store.getters.getAllPosts);
 		this.fetchComments();
+		console.log(this.$store.state.authors);
 	}
 }
 </script>
